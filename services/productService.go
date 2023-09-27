@@ -17,11 +17,20 @@ type ProductService struct {
 	Product *mongo.Collection
 }
 
+/*
+******************************************************
+Initiate Procuct Service
+******************************************************
+*/
 func InitProductService(productCollection *mongo.Collection) interfaces.IProduct {
 	return &ProductService{Product: productCollection}
 }
 
-// AddProduct implements interfaces.IProduct.
+/*
+******************************************************
+AddProduct implements interfaces.IProduct.
+******************************************************
+*/
 func (p *ProductService) AddProduct(product *entities.Product) (*primitive.ObjectID, error) {
 
 	product.Id = primitive.NewObjectID()
@@ -42,11 +51,14 @@ func (p *ProductService) AddProduct(product *entities.Product) (*primitive.Objec
 	}
 }
 
-// GetProductById implements interfaces.IProduct.
-func (p *ProductService) GetProductById(objectId primitive.ObjectID) (*entities.Product, error) {
-	var filter interface{}
+/*
+******************************************************
+GetProductById implements interfaces.IProduct.
+******************************************************
+*/
 
-	filter = bson.M{"_id": objectId} //bson.M{"_id": bson.M{"$eq": objectId}}
+func (p *ProductService) GetProductById(objectId primitive.ObjectID) (*entities.Product, error) {
+	filter := bson.M{"_id": objectId} //bson.M{"_id": bson.M{"$eq": objectId}}
 	//option = bson.D{{"_id", 0}}
 	res := p.Product.FindOne(context.Background(), filter)
 	var product = &entities.Product{}
@@ -58,11 +70,15 @@ func (p *ProductService) GetProductById(objectId primitive.ObjectID) (*entities.
 	return product, nil
 }
 
-// SearchProducts implements interfaces.IProduct.
+/*
+******************************************************
+SearchProducts implements interfaces.IProduct.
+******************************************************
+*/
+
 func (p *ProductService) SearchProducts(val string) (*[]entities.Product, error) {
 
-	var filter interface{} //option
-	filter = bson.M{"name": bson.M{"$eq": val}}
+	filter := bson.M{"name": bson.M{"$eq": val}}
 	var products []entities.Product
 	if cursor, err := p.Product.Find(context.Background(), filter); err == nil {
 		for cursor.Next(context.TODO()) {

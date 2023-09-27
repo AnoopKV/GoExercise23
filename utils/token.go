@@ -7,7 +7,11 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-// Generate token during login
+/*
+**************************************
+Generate token during login
+**************************************
+*/
 func GenerateToken(email string, firstName string, lastName string, id string, userType string) (string, error) {
 	claims := &entities.SignedDetails{
 		Email:      email,
@@ -22,7 +26,11 @@ func GenerateToken(email string, firstName string, lastName string, id string, u
 	return token, err
 }
 
-// Validate passed token during api call
+/*
+**************************************
+Validate passed token during api call
+**************************************
+*/
 func ValidateToken(signedToken string) (*entities.SignedDetails, string) {
 	if token, err := jwt.ParseWithClaims(
 		signedToken,

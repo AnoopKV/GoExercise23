@@ -18,10 +18,20 @@ type UserService struct {
 	User *mongo.Collection
 }
 
+/*
+******************************************************
+Initiate User Service
+******************************************************
+*/
 func InitUserService(userCollection *mongo.Collection) interfaces.IUser {
 	return &UserService{User: userCollection}
 }
 
+/*
+******************************************************
+Register User Functionality
+******************************************************
+*/
 func (u *UserService) Register(user *entities.User) (*entities.UserResponse, error) {
 	user.Id = primitive.NewObjectID()
 
@@ -52,6 +62,11 @@ func (u *UserService) Register(user *entities.User) (*entities.UserResponse, err
 	}
 }
 
+/*
+******************************************************
+Login Functionality
+******************************************************
+*/
 func (u *UserService) Login(Login *entities.Login) (*entities.LoginResponse, error) {
 	//Get user info by email-id
 	log.Println("Email ID::" + Login.Email)
@@ -81,6 +96,11 @@ func (u *UserService) Login(Login *entities.Login) (*entities.LoginResponse, err
 	return nil, (fmt.Errorf("No Record Found!"))
 }
 
+/*
+******************************************************
+Logout Functionality
+******************************************************
+*/
 func (u *UserService) Logout() error {
 	return nil
 }

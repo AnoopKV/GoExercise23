@@ -9,9 +9,9 @@ import (
 )
 
 /*
-****
+**************************************
 Extract ID from Premitivie Object ID
-****
+**************************************
 */
 func GetId(result *mongo.InsertOneResult) string {
 	if oid, ok := result.InsertedID.(primitive.ObjectID); ok {
@@ -20,6 +20,11 @@ func GetId(result *mongo.InsertOneResult) string {
 	return ""
 }
 
+/*
+**************************************
+convert string to primitive ObjectID
+**************************************
+*/
 func SetId(hexStr string) (*primitive.ObjectID, error) {
 	if premitiveId, err := primitive.ObjectIDFromHex(hexStr); err != nil {
 		log.Println(err.Error())
@@ -27,9 +32,13 @@ func SetId(hexStr string) (*primitive.ObjectID, error) {
 	} else {
 		return &premitiveId, nil
 	}
-
 }
 
+/*
+**********************************
+Get Environment Variable values
+**********************************
+*/
 func GetEnvVal(val string) string {
 	return os.Getenv(val)
 }

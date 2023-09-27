@@ -9,6 +9,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/*
+******************************************************
+Authenticate API call based on JWT token
+******************************************************
+*/
 func Authenticate() gin.HandlerFunc {
 	//get token from header
 	//if no token, throw error n abort
@@ -35,6 +40,11 @@ func Authenticate() gin.HandlerFunc {
 	}
 }
 
+/*
+******************************************************
+Authorize API call based on  user type
+******************************************************
+*/
 func Authorize() gin.HandlerFunc {
 	//extract claims and check whether user has particular role
 	//if yes proceed to next metgin
