@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "5e42e683-78f2-4c33-a821-19949aff05d6",
+		"name": "GoExercise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28898070"
+	},
+	"item": [
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6Ik1hbmp1bmF0aDEuS2FtYXRoQG5vcmVwbHkuY29tIiwiRmlyc3RfbmFtZSI6Ik1hbmp1bmF0aDEiLCJMYXN0X25hbWUiOiIiLCJVaWQiOiI2NTE0MDc4NWFmNDFjZTdjZDcxZjJkZjMiLCJVc2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY5NTg5Nzg3MH0.fVZWP2z2cXUnwbQV_hLPhRrvJHfzKsWR_v0gXoYoZrw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/api/user/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"Anoop\",\r\n    \"lastName\":\"KV\",\r\n    \"age\":25,\r\n    \"email\":\"anoop.kv@noreply.com\",\r\n    \"password\":\"654789\",\r\n    \"confirmPassword\":\"654789\",\r\n    \"userType\":\"user\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"anoop.kv@noreply.com\",\r\n    \"password\":\"654789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddProduct",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImFub29wLmt2QG5vcmVwbHkuY29tIiwiRmlyc3RfbmFtZSI6IkFub29wIiwiTGFzdF9uYW1lIjoiIiwiVWlkIjoiNjUxNDFiNjU3MTdhY2FhZTEzZWIwMWIyIiwiVXNlcl90eXBlIjoidXNlciIsImV4cCI6MTY5NTkwMjk1N30.xnqL-7ohnrvHcL-kRmOZfIe9MGCGN8eje5ONBQ0gl2I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"SamsungS9\",\r\n    \"category\":\"battery\",\r\n    \"quantity\":18\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/product/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"product",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindProductId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImFub29wLmt2QG5vcmVwbHkuY29tIiwiRmlyc3RfbmFtZSI6IkFub29wIiwiTGFzdF9uYW1lIjoiIiwiVWlkIjoiNjUxNDFiNjU3MTdhY2FhZTEzZWIwMWIyIiwiVXNlcl90eXBlIjoidXNlciIsImV4cCI6MTY5NTkwMjk1N30.xnqL-7ohnrvHcL-kRmOZfIe9MGCGN8eje5ONBQ0gl2I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/api/product/65141b76717acaae13eb01b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"product",
+						"65141b76717acaae13eb01b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImFub29wLmt2QG5vcmVwbHkuY29tIiwiRmlyc3RfbmFtZSI6IkFub29wIiwiTGFzdF9uYW1lIjoiIiwiVWlkIjoiNjUxNDFiNjU3MTdhY2FhZTEzZWIwMWIyIiwiVXNlcl90eXBlIjoidXNlciIsImV4cCI6MTY5NTkwMjk1N30.xnqL-7ohnrvHcL-kRmOZfIe9MGCGN8eje5ONBQ0gl2I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/api/product/search?name=SamsungS9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "SamsungS9"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
