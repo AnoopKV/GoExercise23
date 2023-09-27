@@ -8,12 +8,12 @@ import (
 )
 
 // Generate token during login
-func GenerateToken(email string, firstName string, lastName string, id string) (string, error) {
+func GenerateToken(email string, firstName string, lastName string, id string, userType string) (string, error) {
 	claims := &entities.SignedDetails{
 		Email:      email,
 		First_name: firstName,
 		Uid:        id,
-		User_type:  "user",
+		User_type:  userType,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Hour * time.Duration(24)).Unix(),
 		},

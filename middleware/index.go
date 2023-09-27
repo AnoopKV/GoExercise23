@@ -36,20 +36,17 @@ func Authenticate() gin.HandlerFunc {
 }
 
 func Authorize() gin.HandlerFunc {
-	//extract claims and check whether he has particular role
+	//extract claims and check whether user has particular role
 	//if yes proceed to next metgin
 	//if no return 403/unauthorized error
 	return func(c *gin.Context) {
 		log.Println("Authorization check in-progress")
-
 		user_type := c.Request.Header.Get("user_type")
 		if user_type == "user" {
 			c.Next()
 		} else {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": fmt.Sprintf("User is not authorized")})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "User is not authorized"})
 			c.Abort()
-			return
 		}
-
 	}
 }

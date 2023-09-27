@@ -15,15 +15,16 @@ type User struct {
 	ConfirmPassword string             `json:"confirmPassword" bson:"confirmPassword,required"`
 	CreatedAt       primitive.DateTime `json:"createdAt,omitempty" bson:"createdAt,omitempty"`
 	UpdatedAt       primitive.DateTime `json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
+	User_Type       string             `json:"userType" bson:"userType,required"`
 }
 
 type SignedDetails struct {
-    Email      string
-    First_name string
-    Last_name  string
-    Uid        string
-    User_type  string
-    jwt.StandardClaims
+	Email      string
+	First_name string
+	Last_name  string
+	Uid        string
+	User_type  string
+	jwt.StandardClaims
 }
 
 type Login struct {
@@ -32,14 +33,14 @@ type Login struct {
 }
 
 type LoginResponse struct {
-	TokenId string `json:"tokenId"`
-	Error   string `json:"error"`
+	TokenId string `json:"tokenId,omitempty"`
+	Error   string `json:"error,omitempty"`
 }
 
 type CustomerResponse struct {
 	Id      primitive.ObjectID `json:"id"`
-	TokenId string             `json:"tokenId"`
-	Error   string             `json:"error"`
+	TokenId string             `json:"tokenId,omitempty"`
+	Error   string             `json:"error,omitempty"`
 }
 
 type UserResponse struct {
@@ -50,4 +51,5 @@ type UserResponse struct {
 	Email     string             `json:"email"`
 	CreatedAt primitive.DateTime `json:"createdAt"`
 	UpdatedAt primitive.DateTime `json:"updatedAt"`
+	User_Type string       		 `json:"userType"`
 }

@@ -47,7 +47,7 @@ func (u *UserService) Register(user *entities.User) (*entities.UserResponse, err
 			log.Println("Exception in UserService, setId():: " + __err.Error())
 			return nil, __err
 		} else {
-			return &entities.UserResponse{Id: *premtiveId, FirstName: user.FirstName, LastName: user.LastName, Age: user.Age, Email: user.Email}, nil
+			return &entities.UserResponse{Id: *premtiveId, FirstName: user.FirstName, LastName: user.LastName, Age: user.Age, Email: user.Email, User_Type: user.User_Type}, nil
 		}
 	}
 }
@@ -66,7 +66,7 @@ func (u *UserService) Login(Login *entities.Login) (*entities.LoginResponse, err
 		//authenticate password
 		if _err := utils.ComparePassword(_user.Password, Login.Password); _err == nil {
 			//if success, generate jwt token
-			if token, __err := utils.GenerateToken(_user.Email, _user.FirstName, _user.LastName, _user.Id.Hex()); __err != nil {
+			if token, __err := utils.GenerateToken(_user.Email, _user.FirstName, _user.LastName, _user.Id.Hex(), _user.User_Type); __err != nil {
 				fmt.Println("UserService, JWT Token Generation Exception:: " + __err.Error())
 				return nil, __err
 			} else {
