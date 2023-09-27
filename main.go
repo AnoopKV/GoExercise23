@@ -31,11 +31,10 @@ func main() {
 	server = gin.Default()
 	server.GET("/", home)
 	InitializeUser()
-	port := utils.GetEnvVal("PORT")
-	server.Run(":" + port)
+	server.Run(":" + utils.GetEnvVal("PORT"))
 }
 func home(c *gin.Context) {
-	c.JSON(200, gin.H{"data": "Go Server is Up and Running..."})
+	c.JSON(200, gin.H{"data": "Ekart is Up and Running..."})
 }
 
 func InitializeUser() {
