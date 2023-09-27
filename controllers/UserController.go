@@ -49,6 +49,6 @@ func (u *UserController) HandleLogin(c *gin.Context) {
 	}
 }
 
-func HandleLogout(c *gin.Context) {
+func (u *UserController) HandleLogout(c *gin.Context) {
 	c.JSON(200, gin.H{"data": "You have been logged out"})
 }

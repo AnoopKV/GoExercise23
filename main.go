@@ -30,16 +30,24 @@ func init() {
 func main() {
 	server = gin.Default()
 	server.GET("/", home)
-	InitializeUser()
+	initializeUser()
+	initializeProduct()
 	server.Run(":" + utils.GetEnvVal("PORT"))
 }
 func home(c *gin.Context) {
 	c.JSON(200, gin.H{"data": "Ekart is Up and Running..."})
 }
 
-func InitializeUser() {
+func initializeUser() {
 	userCollection := config.GetCollection(mongoClient, utils.GetEnvVal("USER_COLLECTION_NAME"), utils.GetEnvVal("DB_NAME"))
 	userService := services.InitUserService(userCollection)
 	userController := controllers.InitUserController(userService)
 	routes.UserRoutes(server, *userController)
+}
+
+func initializeProduct() {
+	propductCollection := config.GetCollection(mongoClient, utils.GetEnvVal("PRODUCT_COLLECTION_NAME"), utils.GetEnvVal("DB_NAME"))
+	productService := services.InitProductService(propductCollection)
+	productController := controllers.InitProductController(productService)
+	routes.ProductRoutes(server, *productController)
 }
