@@ -35,7 +35,7 @@ func InitGRPCService(serverPort string, key string) *GRPCCLientService {
 	perRPC := oauth.TokenSource{TokenSource: oauth2.StaticTokenSource(fetchToken())}
 	creds, err := credentials.NewClientTLSFromFile(data.Path("x509/ca_cert.pem"), "x.test.example.com")
 	if err != nil {
-		log.Fatalf("failed to load credentials: %v", err)
+		log.Println("failed to load credentials: %v", err)
 	}
 	opts := []grpc.DialOption{
 		grpc.WithPerRPCCredentials(perRPC),
@@ -56,10 +56,11 @@ func (g *GRPCCLientService) Register(user *pb.User) (*pb.UserResponse, error) {
 	defer cancel()
 	resp, err := (*(g.UserGRPCClient)).Register(ctx, user)
 	if err != nil {
-		log.Fatalf("client.Register(_) = _, %v: ", err)
+		log.Printf("client.Register(_) = _, %v: \n", err)
+		return nil, err
 	}
 	fmt.Printf("Register: %#v\n", resp)
-	return nil, nil
+	return resp, nil
 }
 
 func (g *GRPCCLientService) Login(req *pb.LoginRequest) (*pb.LoginResponse, error) {
@@ -67,21 +68,23 @@ func (g *GRPCCLientService) Login(req *pb.LoginRequest) (*pb.LoginResponse, erro
 	defer cancel()
 	resp, err := (*(g.UserGRPCClient)).Login(ctx, req)
 	if err != nil {
-		log.Fatalf("client.Login(_) = _, %v: ", err.Error())
+		log.Printf("client.Login(_) = _, %v: \n", err.Error())
+		return nil, err
 	}
 	fmt.Printf("Register: %#v", resp)
-	return nil, nil
+	return resp, nil
 }
 
-func (g *GRPCCLientService) Logout(client pb.UserServiceClient, req *pb.LogoutRequest) (*pb.LoginResponse, error) {
+func (g *GRPCCLientService) Logout(client pb.UserServiceClient, req *pb.LogoutRequest) (*pb.LogoutResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	resp, err := (*(g.UserGRPCClient)).Logout(ctx, req)
 	if err != nil {
-		log.Fatalf("client.Logout(_) = _, %v: ", err)
+		log.Printf("client.Logout(_) = _, %v: \n", err)
+		return nil, err
 	}
 	fmt.Printf("Register: %#v", resp)
-	return nil, nil
+	return resp, nil
 }
 
 // Product related
@@ -91,7 +94,7 @@ func (g *GRPCCLientService) AddProduct(req *pb.Product) (*pb.ProductCreateRespon
 
 	resp, err := (*(g.ProductGRPCClient)).AddProduct(ctx, req)
 	if err != nil {
-		log.Fatalf("client.AddProduct(_) = _, %v: ", err)
+		log.Printf("client.AddProduct(_) = _, %v: \n", err)
 		return nil, err
 	}
 	fmt.Printf("GetProductById: %#v\n", resp)
@@ -104,22 +107,24 @@ func (g *GRPCCLientService) GetProductById(req *pb.ProductValue) (*pb.Product, e
 	defer cancel()
 	resp, err := (*(g.ProductGRPCClient)).GetProductById(ctx, req)
 	if err != nil {
-		log.Fatalf("client.GetProductById(_) = _, %v: ", err)
+		log.Printf("client.GetProductById(_) = _, %v: \n", err)
+		return nil, err
 	}
 	fmt.Printf("GetProductById: %#v\n", resp)
-	return nil, nil
+	return resp, nil
 }
 
-func (g *GRPCCLientService) SearchProduct(req *pb.ProductValue) (*[]pb.ProductsResponse, error) {
+func (g *GRPCCLientService) SearchProduct(req *pb.ProductValue) (*pb.ProductsResponse, error) {
 	fmt.Printf("SearchProduct")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	resp, err := (*(g.ProductGRPCClient)).SearchProduct(ctx, req)
 	if err != nil {
-		log.Fatalf("client.SearchProduct(_) = _, %v: ", err)
+		log.Printf("client.SearchProduct(_) = _, %v: \n", err)
+		return nil, err
 	}
 	fmt.Printf("SearchProduct: %#v\n", resp)
-	return nil, nil
+	return resp, nil
 }
 
 func fetchToken() *oauth2.Token {
