@@ -35,7 +35,7 @@ func InitGRPCService(serverPort string, key string) *GRPCCLientService {
 	perRPC := oauth.TokenSource{TokenSource: oauth2.StaticTokenSource(fetchToken())}
 	creds, err := credentials.NewClientTLSFromFile(data.Path("x509/ca_cert.pem"), "x.test.example.com")
 	if err != nil {
-		log.Println("failed to load credentials: %v", err)
+		log.Printf("failed to load credentials: %v", err)
 	}
 	opts := []grpc.DialOption{
 		grpc.WithPerRPCCredentials(perRPC),
