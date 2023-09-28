@@ -92,7 +92,7 @@ func initializeProduct() {
 }
 
 func (s *ecServer) Register(ctx context.Context, req *pb.User) (*pb.UserResponse, error) {
-	res, err := userService.Register(&entities.User{FirstName: req.FirstName, LastName: req.LastName, Age: int(req.Age), Email: req.Email, Password: req.Password, ConfirmPassword: req.ConfirmPassword})
+	res, err := userService.Register(&entities.User{FirstName: req.FirstName, LastName: req.LastName, Age: int(req.Age), Email: req.Email, Password: req.Password, ConfirmPassword: req.ConfirmPassword, User_Type: req.User_Type})
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (s *ecServer) Register(ctx context.Context, req *pb.User) (*pb.UserResponse
 }
 
 func (s *ecServer) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-	res, err := userService.Login(&entities.Login{Email: req.EmailId, Password: req.Password})
+	res, err := userService.Login(&entities.Login{Email: req.Email, Password: req.Password})
 	if err != nil {
 		return nil, err
 	}
