@@ -1,0 +1,32 @@
+syntax="proto3";
+option go_package = "github.com/AnoopKV/GoExercise23/gRPCServer/proto";
+package proto;
+
+message Product{
+    string Id=1;
+    string Name=2;
+    string Category=3;
+    int32 Quantity=4;
+    string CreatedAt=5;
+    string UpdatedAt=6; 
+}
+
+
+
+message ProductCreateResponse{
+    string Id=1;
+}
+
+message ProductsResponse{
+    repeated Product product=1;
+}
+
+message ProductValue{
+    string val=1;
+}
+
+service ProductService{
+    rpc AddProduct(Product) returns(ProductCreateResponse);
+    rpc GetProductById(ProductValue) returns(Product);
+    rpc SearchProduct(ProductValue) returns(ProductsResponse);
+}

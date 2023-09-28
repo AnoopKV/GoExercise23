@@ -5,6 +5,7 @@ import (
 
 	config "github.com/AnoopKV/GoExercise23/configs"
 	"github.com/AnoopKV/GoExercise23/controllers"
+	gRPCserver "github.com/AnoopKV/GoExercise23/gRPCServer"
 	"github.com/AnoopKV/GoExercise23/routes"
 	"github.com/AnoopKV/GoExercise23/services"
 	"github.com/AnoopKV/GoExercise23/utils"
@@ -32,6 +33,8 @@ func main() {
 	server.GET("/", home)
 	initializeUser()
 	initializeProduct()
+	initializeGRPC(utils.GetEnvVal("GRPC_SERVER_PORT"), utils.GetEnvVal("SECRET_KEY"))
+	log.Println(utils.GetEnvVal("PORT"))
 	server.Run(":" + utils.GetEnvVal("PORT"))
 }
 func home(c *gin.Context) {
@@ -50,4 +53,8 @@ func initializeProduct() {
 	productService := services.InitProductService(propductCollection)
 	productController := controllers.InitProductController(productService)
 	routes.ProductRoutes(server, *productController)
+}
+
+func initializeGRPC(port string, key string) {
+	go gRPCserver.Start(port, key) //seperate thread
 }

@@ -3,6 +3,7 @@ package utils
 import (
 	"log"
 	"os"
+	"strconv"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -41,4 +42,9 @@ Get Environment Variable values
 */
 func GetEnvVal(val string) string {
 	return os.Getenv(val)
+}
+
+func ParseInt(val string) (int, error) {
+	intVal, err := strconv.Atoi(val)
+	return intVal, err
 }

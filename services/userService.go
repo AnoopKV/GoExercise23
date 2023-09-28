@@ -101,6 +101,6 @@ func (u *UserService) Login(Login *entities.Login) (*entities.LoginResponse, err
 Logout Functionality
 ******************************************************
 */
-func (u *UserService) Logout() error {
+func (u *UserService) Logout(token string) error {
 	return nil
 }

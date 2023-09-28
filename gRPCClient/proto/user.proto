@@ -1,0 +1,55 @@
+syntax="proto3";
+option go_package = "github.com/AnoopKV/GoExercise23/gRPCServer/proto";
+package proto;
+
+
+message User{
+    string Id=1;
+    string FirstName=2;
+    string LastName=3;
+    int32 Age=4;
+    string Email=5;
+    string Password=6;
+    string ConfirmPassword=7;
+    string User_Type=8;
+    string CreatedAt=9;
+    string UpdatedAt=10; 
+}
+
+message UserResponse{
+    string Id=1;
+    string FirstName=2;
+    string LastName=3;
+    int32 Age=4;
+    string Email=5;
+    string User_Type=6;
+    string CreatedAt=7;
+    string UpdatedAt=8; 
+}
+message Qualification{
+    string degree=1;
+}
+
+message LoginResponse{
+    string Token=1;
+    string error=2;
+}
+
+message LogoutResponse{
+    string message=1;
+}
+
+message LoginRequest{
+    string emailId=1;
+    string password=2;
+}
+
+message LogoutRequest{
+    string token=1;
+}
+
+service UserService{
+    rpc Register(User) returns(UserResponse);
+    rpc Login(LoginRequest) returns(LoginResponse);
+    rpc Logout(LogoutRequest) returns(LogoutResponse);
+}
