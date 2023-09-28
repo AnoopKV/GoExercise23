@@ -4,21 +4,26 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/AnoopKV/GoExercise23/entities"
-	"github.com/AnoopKV/GoExercise23/interfaces"
+	grpcclient "github.com/AnoopKV/GoExercise23/gRPCClient"
+	"github.com/AnoopKV/GoExercise23/gRPCClient/proto/output/proto"
 	"github.com/gin-gonic/gin"
 )
 
 type UserController struct {
-	userService interfaces.IUser
+	userService *grpcclient.GRPCCLientService
+	//userService interfaces.IUser
 }
 
-func InitUserController(userService interfaces.IUser) *UserController {
+func InitUserController(userService *grpcclient.GRPCCLientService) *UserController {
 	return &UserController{userService: userService}
 }
 
+/*func InitUserController(userService interfaces.IUser) *UserController {
+	//return &UserController{userService: userService}
+}*/
+
 func (u *UserController) HandleRegister(c *gin.Context) {
-	var user entities.User
+	var user proto.User
 	if err := c.BindJSON(&user); err != nil { //Convert json into struct user
 		log.Println("HandleRegister BindJSON Exception::" + err.Error())
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -36,7 +41,7 @@ func (u *UserController) HandleRegister(c *gin.Context) {
 }
 
 func (u *UserController) HandleLogin(c *gin.Context) {
-	var user *entities.Login
+	var user *proto.LoginRequest
 	if err := c.BindJSON(&user); err != nil {
 		log.Println("HandleLogin BindJSON() Exception::" + err.Error())
 		c.IndentedJSON(http.StatusInternalServerError, err)
