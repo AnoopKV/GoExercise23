@@ -48,6 +48,7 @@ func InitGRPCService(serverPort string, key string) *GRPCCLientService {
 	//defer conn.Close()
 	userRPC := pb.NewUserServiceClient(conn)
 	productRPC := pb.NewProductServiceClient(conn)
+
 	return &GRPCCLientService{UserGRPCClient: &userRPC, ProductGRPCClient: &productRPC}
 }
 
@@ -61,7 +62,6 @@ func (g *GRPCCLientService) Register(user *pb.User) (*pb.UserResponse, error) {
 		log.Printf("client.Register(_) = _, %v: \n", _err)
 		return nil, _err
 	}
-
 }
 
 func (g *GRPCCLientService) Login(req *pb.LoginRequest) (*pb.LoginResponse, error) {

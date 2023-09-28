@@ -32,6 +32,7 @@ func init() {
 func main() {
 	server = gin.Default()
 	server.GET("/", home)
+	initializeGRPC(utils.GetEnvVal("GRPC_SERVER_PORT"), utils.GetEnvVal("SECRET_KEY"))
 	grpcValue = grpcclient.InitGRPCService(utils.GetEnvVal("GRPC_SERVER_PORT"), utils.GetEnvVal("SECRET_KEY"))
 	initializeUser()
 	initializeProduct()

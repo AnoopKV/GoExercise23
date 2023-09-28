@@ -78,6 +78,7 @@ func Start(serverPort string, key string) {
 	if __err := s.Serve(lis); __err != nil {
 		log.Fatalf("failed to serve: %v", __err)
 	}
+	log.Println("Last line of server")
 }
 
 func initializeUser() {
