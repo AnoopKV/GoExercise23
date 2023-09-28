@@ -54,13 +54,14 @@ func InitGRPCService(serverPort string, key string) *GRPCCLientService {
 func (g *GRPCCLientService) Register(user *pb.User) (*pb.UserResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	resp, err := (*(g.UserGRPCClient)).Register(ctx, user)
-	if err != nil {
-		log.Printf("client.Register(_) = _, %v: \n", err)
-		return nil, err
+	if resp, _err := (*(g.UserGRPCClient)).Register(ctx, user); _err == nil {
+		fmt.Printf("Register: %#v\n", resp)
+		return resp, nil
+	} else {
+		log.Printf("client.Register(_) = _, %v: \n", _err)
+		return nil, _err
 	}
-	fmt.Printf("Register: %#v\n", resp)
-	return resp, nil
+
 }
 
 func (g *GRPCCLientService) Login(req *pb.LoginRequest) (*pb.LoginResponse, error) {

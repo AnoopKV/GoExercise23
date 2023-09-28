@@ -71,12 +71,12 @@ func Start(serverPort string, key string) {
 	s := grpc.NewServer(opts...)
 	pb.RegisterUserServiceServer(s, &ecServer{})
 	pb.RegisterProductServiceServer(s, &ecServer{})
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+	lis, _err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+	if _err != nil {
+		log.Fatalf("failed to listen: %v", _err)
 	}
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+	if __err := s.Serve(lis); __err != nil {
+		log.Fatalf("failed to serve: %v", __err)
 	}
 }
 
