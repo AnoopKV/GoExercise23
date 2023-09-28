@@ -27,7 +27,7 @@ type GRPCCLientService struct {
 func InitGRPCService(serverPort string, key string) *GRPCCLientService {
 	globalKey = key
 
-	log.Println("Port::", serverPort)
+	log.Println("InitGRPCService Port::", serverPort)
 	addr := flag.String("addr", "localhost:"+serverPort, "the address to connect to")
 	flag.Parse()
 
@@ -67,7 +67,7 @@ func (g *GRPCCLientService) Login(req *pb.LoginRequest) (*pb.LoginResponse, erro
 	defer cancel()
 	resp, err := (*(g.UserGRPCClient)).Login(ctx, req)
 	if err != nil {
-		log.Fatalf("client.Register(_) = _, %v: ", err)
+		log.Fatalf("client.Login(_) = _, %v: ", err.Error())
 	}
 	fmt.Printf("Register: %#v", resp)
 	return nil, nil
@@ -78,7 +78,7 @@ func (g *GRPCCLientService) Logout(client pb.UserServiceClient, req *pb.LogoutRe
 	defer cancel()
 	resp, err := (*(g.UserGRPCClient)).Logout(ctx, req)
 	if err != nil {
-		log.Fatalf("client.Register(_) = _, %v: ", err)
+		log.Fatalf("client.Logout(_) = _, %v: ", err)
 	}
 	fmt.Printf("Register: %#v", resp)
 	return nil, nil
@@ -91,7 +91,7 @@ func (g *GRPCCLientService) AddProduct(req *pb.Product) (*pb.ProductCreateRespon
 
 	resp, err := (*(g.ProductGRPCClient)).AddProduct(ctx, req)
 	if err != nil {
-		log.Fatalf("client.GetProductById(_) = _, %v: ", err)
+		log.Fatalf("client.AddProduct(_) = _, %v: ", err)
 		return nil, err
 	}
 	fmt.Printf("GetProductById: %#v\n", resp)
